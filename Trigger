@@ -1,1 +1,24 @@
+create or replace function aumentoSueldo() 
+returns trigger as $aumentoSueldo$
+declare 
+    numeroRecetas int;
+begin
+    select count (*) into numeroRecetas from chef_receta where chef_id =new.chef_id;
+	if (numeroRecetas < 4) then
+	    raise exception 'No se puede aumentar el sueldo. Chef no cuenta con más de 5 recetas';
+		end if;
+		return new;
+end;
+$aumentoSueldo$
+language plpgsql;
 
+create trigger aumentoSueldo before insert
+on chef for each row
+execute procedure aumentoSueldo();
+ 
+/*vemos cuantas recetas tiene el cliente con id=3*/
+select count (*) as recetas from chef_receta where chef_id=3
+
+/*Ahora probamos si el trigger funciona*/
+INSERT INTO CHEF VALUES(3, 1, 3, 'SERGIO','ORTIZ','0937482736', 'CALLE 303 Y AVENIDA 200', 
+						'sergio_ortiz@hotmail.com', 'CHEF DE PARRILLAS', '900,00', '9 AÑOS', '2020/06/10','2025/06/10');
