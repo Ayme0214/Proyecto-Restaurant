@@ -1,0 +1,99 @@
+drop index RELATIONSHIP_12_FK;
+
+drop index RELATIONSHIP_5_FK;
+
+drop index CHEF_PK;
+
+drop table CHEF;
+
+drop index CHEF_HORARIO_FK;
+
+drop index CHEF_HORARIO2_FK;
+
+drop index CHEF_HORARIO_PK;
+
+drop table CHEF_HORARIO;
+
+drop index CHEF_RECETA_FK;
+
+drop index CHEF_RECETA2_FK;
+
+drop index CHEF_RECETA_PK;
+
+drop table CHEF_RECETA;
+
+drop index CLIENTE_PK;
+
+drop table CLIENTE;
+
+drop index DETALLE_FACTURA_FK;
+
+drop index DETALLE_FACTURA2_FK;
+
+drop index DETALLE_FACTURA_PK;
+
+drop table DETALLE_FACTURA;
+
+drop index DETALLE_RECETA_FK;
+
+drop index DETALLE_RECETA2_FK;
+
+drop index DETALLE_RECETA_PK;
+
+drop table DETALLE_RECETA;
+
+drop index ESC_GASTRONOMIA_PK;
+
+drop table ESC_GASTRONOMIA;
+
+drop index RELATIONSHIP_17_FK;
+
+drop index RELATIONSHIP_16_FK;
+
+drop index FACTURA_PK;
+
+drop table FACTURA;
+
+drop index HORARIOS_PERSONAL_PK;
+
+drop table HORARIOS_PERSONAL;
+
+drop index INGREDIENTE_PK;
+
+drop table INGREDIENTE;
+
+drop index RELATIONSHIP_9_FK;
+
+drop index MESA_PK;
+
+drop table MESA;
+
+drop index RELATIONSHIP_4_FK;
+
+drop index MESERO_PK;
+
+drop table MESERO;
+
+drop index MESERO_HORARIO_FK;
+
+drop index MESERO_HORARIO2_FK;
+
+drop index MESERO_HORARIO_PK;
+
+drop table MESERO_HORARIO;
+
+drop index RECETA_PK;
+
+drop table RECETA;
+
+drop index RELATIONSHIP_14_FK;
+
+drop index RELATIONSHIP_8_FK;
+
+drop index RESERVACION_PK;
+
+drop table RESERVACION;
+
+drop index RESTAURANT_PK;
+
+drop table RESTAURANT;
