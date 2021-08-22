@@ -1,0 +1,89 @@
+alter table CHEF
+   add constraint FK_CHEF_RELATIONS_ESC_GAST foreign key (ESC_GAST_ID)
+      references ESC_GASTRONOMIA (ESC_GAST_ID)
+      on delete restrict on update restrict;
+
+alter table CHEF
+   add constraint FK_CHEF_RELATIONS_RESTAURA foreign key (RESTAURANT_ID)
+      references RESTAURANT (RESTAURANT_ID)
+      on delete restrict on update restrict;
+
+alter table CHEF_HORARIO
+   add constraint FK_CHEF_HOR_CHEF_HORA_HORARIOS foreign key (HORARIOS_PERSONAL_ID)
+      references HORARIOS_PERSONAL (HORARIOS_PERSONAL_ID)
+      on delete restrict on update restrict;
+
+alter table CHEF_HORARIO
+   add constraint FK_CHEF_HOR_CHEF_HORA_CHEF foreign key (CHEF_ID)
+      references CHEF (CHEF_ID)
+      on delete restrict on update restrict;
+
+alter table CHEF_RECETA
+   add constraint FK_CHEF_REC_CHEF_RECE_RECETA foreign key (RECETA_ID)
+      references RECETA (RECETA_ID)
+      on delete restrict on update restrict;
+
+alter table CHEF_RECETA
+   add constraint FK_CHEF_REC_CHEF_RECE_CHEF foreign key (CHEF_ID)
+      references CHEF (CHEF_ID)
+      on delete restrict on update restrict;
+
+alter table DETALLE_FACTURA
+   add constraint FK_DETALLE__DETALLE_F_RECETA foreign key (RECETA_ID)
+      references RECETA (RECETA_ID)
+      on delete restrict on update restrict;
+
+alter table DETALLE_FACTURA
+   add constraint FK_DETALLE__DETALLE_F_FACTURA foreign key (FACTURA_ID)
+      references FACTURA (FACTURA_ID)
+      on delete restrict on update restrict;
+
+alter table DETALLE_RECETA
+   add constraint FK_DETALLE__DETALLE_R_INGREDIE foreign key (INGRED_ID)
+      references INGREDIENTE (INGRED_ID)
+      on delete restrict on update restrict;
+
+alter table DETALLE_RECETA
+   add constraint FK_DETALLE__DETALLE_R_RECETA foreign key (RECETA_ID)
+      references RECETA (RECETA_ID)
+      on delete restrict on update restrict;
+
+alter table FACTURA
+   add constraint FK_FACTURA_RELATIONS_CLIENTE foreign key (CLIENTE_ID)
+      references CLIENTE (CLIENTE_ID)
+      on delete restrict on update restrict;
+
+alter table FACTURA
+   add constraint FK_FACTURA_RELATIONS_MESERO foreign key (CHEF_ID2)
+      references MESERO (CHEF_ID2)
+      on delete restrict on update restrict;
+
+alter table MESA
+   add constraint FK_MESA_RELATIONS_RESERVAC foreign key (RESERVACION_ID)
+      references RESERVACION (RESERVACION_ID)
+      on delete restrict on update restrict;
+
+alter table MESERO
+   add constraint FK_MESERO_RELATIONS_RESTAURA foreign key (RESTAURANT_ID)
+      references RESTAURANT (RESTAURANT_ID)
+      on delete restrict on update restrict;
+
+alter table MESERO_HORARIO
+   add constraint FK_MESERO_H_MESERO_HO_HORARIOS foreign key (HORARIOS_PERSONAL_ID)
+      references HORARIOS_PERSONAL (HORARIOS_PERSONAL_ID)
+      on delete restrict on update restrict;
+
+alter table MESERO_HORARIO
+   add constraint FK_MESERO_H_MESERO_HO_MESERO foreign key (CHEF_ID2)
+      references MESERO (CHEF_ID2)
+      on delete restrict on update restrict;
+
+alter table RESERVACION
+   add constraint FK_RESERVAC_RELATIONS_RESTAURA foreign key (RESTAURANT_ID)
+      references RESTAURANT (RESTAURANT_ID)
+      on delete restrict on update restrict;
+
+alter table RESERVACION
+   add constraint FK_RESERVAC_RELATIONS_CLIENTE foreign key (CLIENTE_ID)
+      references CLIENTE (CLIENTE_ID)
+      on delete restrict on update restrict;
