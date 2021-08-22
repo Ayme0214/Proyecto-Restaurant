@@ -1,0 +1,41 @@
+/*Consulta1: Número de recetas que ha propuesto cada chef por cada año que ha estado en la institución*/
+select chef_id, 
+  count (*) as recetas 
+  from chef_receta 
+  group by (chef_id) 
+  order by chef_id
+
+/*Consulta2: Cantidad de veces de reservas y que ha sido atendido el cliente y cantidad de veces que el cliente ha cancelado*/
+SELECT 
+  cliente.cliente_id, 
+  cliente.cliente_nombre, 
+  reservaciones.reservaciones_id, 
+  reservaciones.reservaciones_estado, 
+  reservaciones.reservaciones_fecha, 
+  reservaciones.reservaciones_tipo_pago
+FROM 
+  reservaciones
+  join cliente on cliente.cliente_id= reservaciones.cliente_id
+WHERE 
+  CLIENTE.CLIENTE_ID=2;
+
+/*Consulta3: Por cada plato mostrar el costo de producción y precio de venta*/
+select detalle_receta.receta_id, 
+  sum (ingred_costo) as costo_produccion 
+  from detalle_receta
+  join ingrediente on ingrediente.ingred_id= detalle_receta.ingred_id
+  group by (detalle_receta.receta_id) 
+  order by detalle_receta.receta_id;
+  
+select receta_id, receta_precio_venta
+  from receta
+  order by receta_id
+
+/*Consulta4: Mostrar en orden descendente las ventas, por años y meses*/
+SELECT 
+   factura_detalle.fact_detalle_tipo_receta, 
+   extract(year from factura_fecha) as año, 
+   extract(month from factura_fecha) as mes
+FROM factura 
+   join factura_detalle on factura_detalle.factura_id= factura.factura_id
+ORDER BY factura_fecha desc;
