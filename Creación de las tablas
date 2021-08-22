@@ -1,0 +1,432 @@
+/*==============================================================*/
+/* Table: CHEF                                                  */
+/*==============================================================*/
+create table CHEF (
+   CHEF_ID              INT4                 not null,
+   RESTAURANT_ID        INT4                 null,
+   ESC_GAST_ID          INT4                 null,
+   CHEF_NOMBRE          TEXT                 not null,
+   CHEF_APELLIDO        TEXT                 not null,
+   CHEF_CEDULA          TEXT                 not null,
+   CHEF_DIRECCION       TEXT                 not null,
+   CHEF_EMAIL           TEXT                 not null,
+   CHEF_ESPECIALIDAD    TEXT                 not null,
+   CHEF_SUELDO          MONEY                not null,
+   CHEF_TIEMPO_EXPERIENCIA TEXT                 not null,
+   CHEF_FECHA_ENTRADA   DATE                 not null,
+   CHEF_FECHA_SALIDA    DATE                 not null,
+   constraint PK_CHEF primary key (CHEF_ID)
+);
+
+/*==============================================================*/
+/* Index: CHEF_PK                                               */
+/*==============================================================*/
+create unique index CHEF_PK on CHEF (
+CHEF_ID
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_5_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_5_FK on CHEF (
+RESTAURANT_ID
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_12_FK                                    */
+/*==============================================================*/
+create  index RELATIONSHIP_12_FK on CHEF (
+ESC_GAST_ID
+);
+
+/*==============================================================*/
+/* Table: CHEF_HORARIO                                          */
+/*==============================================================*/
+create table CHEF_HORARIO (
+   HORARIOS_PERSONAL_ID INT4                 not null,
+   CHEF_ID              INT4                 not null,
+   constraint PK_CHEF_HORARIO primary key (HORARIOS_PERSONAL_ID, CHEF_ID)
+);
+
+/*==============================================================*/
+/* Index: CHEF_HORARIO_PK                                       */
+/*==============================================================*/
+create unique index CHEF_HORARIO_PK on CHEF_HORARIO (
+HORARIOS_PERSONAL_ID,
+CHEF_ID
+);
+
+/*==============================================================*/
+/* Index: CHEF_HORARIO2_FK                                      */
+/*==============================================================*/
+create  index CHEF_HORARIO2_FK on CHEF_HORARIO (
+CHEF_ID
+);
+
+/*==============================================================*/
+/* Index: CHEF_HORARIO_FK                                       */
+/*==============================================================*/
+create  index CHEF_HORARIO_FK on CHEF_HORARIO (
+HORARIOS_PERSONAL_ID
+);
+
+/*==============================================================*/
+/* Table: CHEF_RECETA                                           */
+/*==============================================================*/
+create table CHEF_RECETA (
+   RECETA_ID            INT4                 not null,
+   CHEF_ID              INT4                 not null,
+   constraint PK_CHEF_RECETA primary key (RECETA_ID, CHEF_ID)
+);
+
+/*==============================================================*/
+/* Index: CHEF_RECETA_PK                                        */
+/*==============================================================*/
+create unique index CHEF_RECETA_PK on CHEF_RECETA (
+RECETA_ID,
+CHEF_ID
+);
+
+/*==============================================================*/
+/* Index: CHEF_RECETA2_FK                                       */
+/*==============================================================*/
+create  index CHEF_RECETA2_FK on CHEF_RECETA (
+CHEF_ID
+);
+
+/*==============================================================*/
+/* Index: CHEF_RECETA_FK                                        */
+/*==============================================================*/
+create  index CHEF_RECETA_FK on CHEF_RECETA (
+RECETA_ID
+);
+
+/*==============================================================*/
+/* Table: CLIENTE                                               */
+/*==============================================================*/
+create table CLIENTE (
+   CLIENTE_ID           INT4                 not null,
+   CLIENTE_NOMBRE       TEXT                 not null,
+   CLIENTE_APELLIDOS    TEXT                 not null,
+   CLIENTE_CEDULA       TEXT                 not null,
+   CLIENTE_EMAIL        TEXT                 not null,
+   CLIENTE_TELEFONO     TEXT                 not null,
+   CLIENTE_FECHA_NACIMIENTO DATE                 not null,
+   constraint PK_CLIENTE primary key (CLIENTE_ID)
+);
+
+/*==============================================================*/
+/* Index: CLIENTE_PK                                            */
+/*==============================================================*/
+create unique index CLIENTE_PK on CLIENTE (
+CLIENTE_ID
+);
+
+/*==============================================================*/
+/* Table: DETALLE_FACTURA                                       */
+/*==============================================================*/
+create table DETALLE_FACTURA (
+   RECETA_ID            INT4                 not null,
+   FACTURA_ID           INT4                 not null,
+   DET_FAC_CANT_RECETAS INT4                 not null,
+   constraint PK_DETALLE_FACTURA primary key (RECETA_ID, FACTURA_ID)
+);
+
+/*==============================================================*/
+/* Index: DETALLE_FACTURA_PK                                    */
+/*==============================================================*/
+create unique index DETALLE_FACTURA_PK on DETALLE_FACTURA (
+RECETA_ID,
+FACTURA_ID
+);
+
+/*==============================================================*/
+/* Index: DETALLE_FACTURA2_FK                                   */
+/*==============================================================*/
+create  index DETALLE_FACTURA2_FK on DETALLE_FACTURA (
+FACTURA_ID
+);
+
+/*==============================================================*/
+/* Index: DETALLE_FACTURA_FK                                    */
+/*==============================================================*/
+create  index DETALLE_FACTURA_FK on DETALLE_FACTURA (
+RECETA_ID
+);
+
+/*==============================================================*/
+/* Table: DETALLE_RECETA                                        */
+/*==============================================================*/
+create table DETALLE_RECETA (
+   INGRED_ID            INT4                 not null,
+   RECETA_ID            INT4                 not null,
+   constraint PK_DETALLE_RECETA primary key (INGRED_ID, RECETA_ID)
+);
+
+/*==============================================================*/
+/* Index: DETALLE_RECETA_PK                                     */
+/*==============================================================*/
+create unique index DETALLE_RECETA_PK on DETALLE_RECETA (
+INGRED_ID,
+RECETA_ID
+);
+
+/*==============================================================*/
+/* Index: DETALLE_RECETA2_FK                                    */
+/*==============================================================*/
+create  index DETALLE_RECETA2_FK on DETALLE_RECETA (
+RECETA_ID
+);
+
+/*==============================================================*/
+/* Index: DETALLE_RECETA_FK                                     */
+/*==============================================================*/
+create  index DETALLE_RECETA_FK on DETALLE_RECETA (
+INGRED_ID
+);
+
+/*==============================================================*/
+/* Table: ESC_GASTRONOMIA                                       */
+/*==============================================================*/
+create table ESC_GASTRONOMIA (
+   ESC_GAST_ID          INT4                 not null,
+   ESC_GAST_NOMBRE      TEXT                 not null,
+   ESC_GAST_PAIS        TEXT                 not null,
+   ESC_GAST_DIRECCION   TEXT                 not null,
+   ESC_GAST_CONTACTO    TEXT                 not null,
+   constraint PK_ESC_GASTRONOMIA primary key (ESC_GAST_ID)
+);
+
+/*==============================================================*/
+/* Index: ESC_GASTRONOMIA_PK                                    */
+/*==============================================================*/
+create unique index ESC_GASTRONOMIA_PK on ESC_GASTRONOMIA (
+ESC_GAST_ID
+);
+
+/*==============================================================*/
+/* Table: FACTURA                                               */
+/*==============================================================*/
+create table FACTURA (
+   FACTURA_ID           INT4                 not null,
+   CLIENTE_ID           INT4                 null,
+   CHEF_ID2             INT4                 null,
+   FACTURA_FECHA        DATE                 not null,
+   constraint PK_FACTURA primary key (FACTURA_ID)
+);
+
+/*==============================================================*/
+/* Index: FACTURA_PK                                            */
+/*==============================================================*/
+create unique index FACTURA_PK on FACTURA (
+FACTURA_ID
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_16_FK                                    */
+/*==============================================================*/
+create  index RELATIONSHIP_16_FK on FACTURA (
+CLIENTE_ID
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_17_FK                                    */
+/*==============================================================*/
+create  index RELATIONSHIP_17_FK on FACTURA (
+CHEF_ID2
+);
+
+/*==============================================================*/
+/* Table: HORARIOS_PERSONAL                                     */
+/*==============================================================*/
+create table HORARIOS_PERSONAL (
+   HORARIOS_PERSONAL_ID INT4                 not null,
+   HORARIOS_HORA_ENTRADA TIME                 not null,
+   HORARIOS_HORA_SALIDA TIME                 not null,
+   HORARIOS_DIAS_DISPONIBLES VARCHAR(40)          not null,
+   constraint PK_HORARIOS_PERSONAL primary key (HORARIOS_PERSONAL_ID)
+);
+
+/*==============================================================*/
+/* Index: HORARIOS_PERSONAL_PK                                  */
+/*==============================================================*/
+create unique index HORARIOS_PERSONAL_PK on HORARIOS_PERSONAL (
+HORARIOS_PERSONAL_ID
+);
+
+/*==============================================================*/
+/* Table: INGREDIENTE                                           */
+/*==============================================================*/
+create table INGREDIENTE (
+   INGRED_ID            INT4                 not null,
+   INGRED_DESCRIPCION   TEXT                 not null,
+   INGRED_COSTO         MONEY                not null,
+   constraint PK_INGREDIENTE primary key (INGRED_ID)
+);
+
+/*==============================================================*/
+/* Index: INGREDIENTE_PK                                        */
+/*==============================================================*/
+create unique index INGREDIENTE_PK on INGREDIENTE (
+INGRED_ID
+);
+
+/*==============================================================*/
+/* Table: MESA                                                  */
+/*==============================================================*/
+create table MESA (
+   MESA_ID              INT4                 not null,
+   RESERVACION_ID       INT4                 null,
+   MESA_DESCRIPCION     TEXT                 not null,
+   MESA_LUGAR_REFERENCIA TEXT                 not null,
+   MESA_CANTIDAD_PERSONAS INT4                 not null,
+   MESA_ESTADO          TEXT                 not null,
+   constraint PK_MESA primary key (MESA_ID)
+);
+
+/*==============================================================*/
+/* Index: MESA_PK                                               */
+/*==============================================================*/
+create unique index MESA_PK on MESA (
+MESA_ID
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_9_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_9_FK on MESA (
+RESERVACION_ID
+);
+
+/*==============================================================*/
+/* Table: MESERO                                                */
+/*==============================================================*/
+create table MESERO (
+   CHEF_ID2             INT4                 not null,
+   RESTAURANT_ID        INT4                 null,
+   MESERO_NOMBRE        TEXT                 not null,
+   MESERO_APELLIDO      TEXT                 not null,
+   MESERO_CEDULA        TEXT                 not null,
+   MESERO_DIRECCION     TEXT                 not null,
+   MESERO_EMAIL         TEXT                 not null,
+   MESERO_FECHA_NACIMIENTO DATE                 not null,
+   MESERO_GENERO        TEXT                 not null,
+   constraint PK_MESERO primary key (CHEF_ID2)
+);
+
+/*==============================================================*/
+/* Index: MESERO_PK                                             */
+/*==============================================================*/
+create unique index MESERO_PK on MESERO (
+CHEF_ID2
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_4_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_4_FK on MESERO (
+RESTAURANT_ID
+);
+
+/*==============================================================*/
+/* Table: MESERO_HORARIO                                        */
+/*==============================================================*/
+create table MESERO_HORARIO (
+   HORARIOS_PERSONAL_ID INT4                 not null,
+   CHEF_ID2             INT4                 not null,
+   constraint PK_MESERO_HORARIO primary key (HORARIOS_PERSONAL_ID, CHEF_ID2)
+);
+
+/*==============================================================*/
+/* Index: MESERO_HORARIO_PK                                     */
+/*==============================================================*/
+create unique index MESERO_HORARIO_PK on MESERO_HORARIO (
+HORARIOS_PERSONAL_ID,
+CHEF_ID2
+);
+
+/*==============================================================*/
+/* Index: MESERO_HORARIO2_FK                                    */
+/*==============================================================*/
+create  index MESERO_HORARIO2_FK on MESERO_HORARIO (
+CHEF_ID2
+);
+
+/*==============================================================*/
+/* Index: MESERO_HORARIO_FK                                     */
+/*==============================================================*/
+create  index MESERO_HORARIO_FK on MESERO_HORARIO (
+HORARIOS_PERSONAL_ID
+);
+
+/*==============================================================*/
+/* Table: RECETA                                                */
+/*==============================================================*/
+create table RECETA (
+   RECETA_ID            INT4                 not null,
+   RECETA_DESCRIPCION   TEXT                 not null,
+   RECETA_CANTIDAD_COMENSALES INT4                 not null,
+   RECETA_PRECIO_VENTA  MONEY                not null,
+   RECETA_FECHA         DATE                 not null,
+   constraint PK_RECETA primary key (RECETA_ID)
+);
+
+/*==============================================================*/
+/* Index: RECETA_PK                                             */
+/*==============================================================*/
+create unique index RECETA_PK on RECETA (
+RECETA_ID
+);
+
+/*==============================================================*/
+/* Table: RESERVACION                                           */
+/*==============================================================*/
+create table RESERVACION (
+   RESERVACION_ID       INT4                 not null,
+   CLIENTE_ID           INT4                 null,
+   RESTAURANT_ID        INT4                 null,
+   RESERVACION_ESTADO   TEXT                 not null,
+   RESERVACION_FECHA    DATE                 not null,
+   RESERVACION_TIPO_PAGO VARCHAR(256)         not null,
+   constraint PK_RESERVACION primary key (RESERVACION_ID)
+);
+
+/*==============================================================*/
+/* Index: RESERVACION_PK                                        */
+/*==============================================================*/
+create unique index RESERVACION_PK on RESERVACION (
+RESERVACION_ID
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_8_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_8_FK on RESERVACION (
+CLIENTE_ID
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_14_FK                                    */
+/*==============================================================*/
+create  index RELATIONSHIP_14_FK on RESERVACION (
+RESTAURANT_ID
+);
+
+/*==============================================================*/
+/* Table: RESTAURANT                                            */
+/*==============================================================*/
+create table RESTAURANT (
+   RESTAURANT_ID        INT4                 not null,
+   RESTAURANT_NOMBRE    TEXT                 not null,
+   RESTAURANT_DIRECCION TEXT                 not null,
+   RESTAURANT_TELEFONO  TEXT                 not null,
+   RESTAURANT_PAGINA_WEB TEXT                 not null,
+   constraint PK_RESTAURANT primary key (RESTAURANT_ID)
+);
+
+/*==============================================================*/
+/* Index: RESTAURANT_PK                                         */
+/*==============================================================*/
+create unique index RESTAURANT_PK on RESTAURANT (
+RESTAURANT_ID
+);
