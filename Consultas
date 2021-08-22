@@ -20,16 +20,15 @@ WHERE
   CLIENTE.CLIENTE_ID=2;
 
 /*Consulta3: Por cada plato mostrar el costo de producción y precio de venta*/
-select detalle_receta.receta_id, 
-  sum (ingred_costo) as costo_produccion 
+select detalle_receta.receta_id, 'costo_produccion' As contabilidad,
+  sum (ingred_costo) as precio
   from detalle_receta
   join ingrediente on ingrediente.ingred_id= detalle_receta.ingred_id
   group by (detalle_receta.receta_id) 
-  order by detalle_receta.receta_id;
-  
-select receta_id, receta_precio_venta
-  from receta
-  order by receta_id
+union
+select receta_id, 'precio_venta', receta_precio_venta 
+from receta
+group by receta_id
 
 /*Consulta4: Mostrar en orden descendente las ventas, por años y meses*/
 SELECT 
