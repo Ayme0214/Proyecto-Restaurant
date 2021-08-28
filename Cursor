@@ -1,1 +1,23 @@
-
+/*CURSOR: Cursor que muestre la receta, la cantidad de chef que hacen dicha receta y el número de días que ha sido servido esa receta.*/
+do $$
+declare
+    tabla record;
+	recetas cursor for select receta.receta_descripcion as receta, 
+       count(chef_receta.chef_id) as cantidadChef, 
+	   count (detalle_factura.receta_id) as ventas
+	   from detalle_factura
+	   join factura on factura.factura_id = detalle_factura.factura_id
+	   join receta on receta.receta_id = detalle_factura.receta_id
+	   join chef_receta on chef_receta.receta_id = receta.receta_id
+	   join chef on chef.chef_id = chef_receta.chef_id
+	   group by receta;
+begin
+open recetas;
+fetch recetas into tabla;
+while (found) loop
+Raise notice 'Nombre de la receta: %, Cantidad de chef que la realizan: %, Se ha vendido por: % días',
+tabla.receta, tabla.cantidadChef, tabla.ventas;
+fetch recetas into tabla;
+end loop;
+end $$
+language 'plpgsql';
