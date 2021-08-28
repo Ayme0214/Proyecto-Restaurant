@@ -4,7 +4,7 @@ declare
     numeroRecetas int;
 begin
     select count (*) into numeroRecetas from chef_receta where chef_id =new.chef_id;
-	if (numeroRecetas < 4) then
+	if (numeroRecetas < 5) then
 	    raise exception 'No se puede aumentar el sueldo. Chef no cuenta con más de 5 recetas';
 		end if;
 		return new;
