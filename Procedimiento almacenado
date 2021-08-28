@@ -1,1 +1,21 @@
+/*PROCEDIMIENTO ALMACENADO: Que el procedimiento almacenado reciba el nombre del chef y muestre el número de recetas que tenga.*/
+create or replace function obtener_recetas_chef(
+    IN nombrechef varchar,
+	OUT numeroRecetas bigint
+)
+as $BODY$
+begin 
+select count (distinct chef_receta.receta_id) into numeroRecetas
+from chef_receta
+join receta on receta.receta_id = chef_receta.receta_id
+join chef on chef.chef_id = chef_receta.chef_id
+where chef.chef_nombre = nombrechef;
+end 
+$BODY$
+language plpgsql;
 
+/*Hacemos llamado a la función de la siguiente forma e ingresamos 
+el nombre del chef que queremos obtener las recetas*/
+select *from obtener_recetas_chef('ALEX')
+
+select *from obtener_recetas_chef('ALEXANDRA')
