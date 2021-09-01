@@ -1,3 +1,4 @@
+/*TRIGGER: Trigger que impida que a un chef se le pueda incrementar el sueldo si no tiene mínimo 5 platos de su autoría.*
 create or replace function aumentoSueldo() 
 returns trigger as $aumentoSueldo$
 declare 
